@@ -2,7 +2,9 @@ import { body, validationResult } from "express-validator";
 
 // ✅ Validate new order creation
 export const validateOrder = [
+  // tableId is optional for guest orders (allows browsing/ordering without selecting a table)
   body("tableId")
+    .optional()
     .isMongoId()
     .withMessage("Invalid table ID"),
   body("items")
